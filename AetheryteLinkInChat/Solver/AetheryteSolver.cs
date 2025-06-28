@@ -42,7 +42,7 @@ public class AetheryteSolver(IDataManager dataManager)
                     DalamudLog.Log.Verbose("P1 = ({X1}, {Y1}), P2 = ({X2}, {Y2})", x, y, markerX, markerY);
 
                     DalamudLog.Log.Verbose("path = {S}", path);
-                    if (path is AetheryteTeleportPath {Aetheryte.AethernetGroup: > 0})
+                    if (path is AetheryteTeleportPath { Aetheryte.AethernetGroup: > 0 })
                     {
                         DalamudLog.Log.Verbose("skip distance calculation: this is aethernet: {S}", path);
                     }
@@ -137,7 +137,7 @@ public class AetheryteSolver(IDataManager dataManager)
         // replace Boxed letters with alphabets
         text = string.Join(string.Empty, text.Select(ReplaceSeIconChar));
 
-        return worldSheet.Where(x => x.IsPublic)
+        return worldSheet.Where(x => x.RowId > 1000 && x.UserType == 101)
             .TryGetFirst(x => text.Contains(x.Name.ExtractText(), StringComparison.OrdinalIgnoreCase), out var world)
             ? world
             : currentWorld;

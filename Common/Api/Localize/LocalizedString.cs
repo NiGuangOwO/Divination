@@ -11,6 +11,7 @@ public sealed class LocalizedString
     public string? Ja { get; init; }
     public string? Ge { get; init; }
     public string? Fr { get; init; }
+    public string? Zh_CN { get; init; }
 
     public static implicit operator string(LocalizedString localizedString)
     {
@@ -38,6 +39,8 @@ public sealed class LocalizedString
                 return Ge;
             case ClientLanguage.French when !string.IsNullOrWhiteSpace(Fr):
                 return Fr;
+            case ClientLanguage.ChineseSimplified when !string.IsNullOrWhiteSpace(Zh_CN):
+                return Zh_CN;
             default:
                 return En;
         }
