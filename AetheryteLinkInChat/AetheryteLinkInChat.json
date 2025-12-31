@@ -4,5 +4,6 @@
   "Punchline": "快速传送以进行怪物狩猎和寻宝！",
   "Description": "从游戏聊天信息的地图链接，中显示一个传送链接到最近的以太之光的链接。输入 /alic 来配置插件。",
   "Tags": [ "teleporter" ],
-  "CategoryTags": [ "utility" ]
+  "CategoryTags": [ "utility" ],
+  "TestingDalamudApiLevel": 14
 }

@@ -24,7 +24,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           submodules: 'recursive'
           # GitVersion
@@ -56,15 +56,35 @@ jobs:
             '/p:AssemblyTitle="${{ env.PLUGIN_DESCRIPTION }}"'
         working-directory: '${{ inputs.working-directory }}'
 
+      - name: Patch TestingDalamudApiLevel
+        run: |
+            $manifestPath = ".\${{ inputs.plugin-name }}.json"
+            $outputManifestPath = ".\bin\CIRelease\${{ inputs.plugin-name }}\${{ inputs.plugin-name }}.json"
+  
+            if (Test-Path $manifestPath) {
+              $sourceManifest = Get-Content $manifestPath -Raw | ConvertFrom-Json
+  
+              if ($null -ne $sourceManifest.TestingDalamudApiLevel) {
+                if (Test-Path $outputManifestPath) {
+                  $outputManifest = Get-Content $outputManifestPath -Raw | ConvertFrom-Json
+                  $outputManifest | Add-Member -NotePropertyName "TestingDalamudApiLevel" -NotePropertyValue $sourceManifest.TestingDalamudApiLevel -Force
+                  $outputManifest | ConvertTo-Json -Depth 10 | Set-Content $outputManifestPath -Encoding UTF8
+  
+                  Write-Host "Added TestingDalamudApiLevel: $($sourceManifest.TestingDalamudApiLevel)"
+                }
+              }
+            }
+        working-directory: '${{ inputs.working-directory }}'
+
       - name: Upload Artifact (release)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: '${{ inputs.plugin-name }}'
           path: '${{ inputs.working-directory }}/bin/CIRelease/${{ inputs.plugin-name }}'
           if-no-files-found: error
 
       - name: Upload Artifact (gitversion.json)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: '${{ inputs.plugin-name }}-GitVersion'
           path: '${{ inputs.working-directory }}/obj/gitversion.json'

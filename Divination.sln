@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AetheryteLinkInChat", "Aeth
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horoscope", "Horoscope\Horoscope.csproj", "{A099E0CA-0C4E-402A-B334-E243D4286872}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{7D0FE0C5-774F-410E-A185-92C3F8CD0BD0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AetheryteLinkInChat.IpcModel", "AetheryteLinkInChat.IpcModel\AetheryteLinkInChat.IpcModel.csproj", "{A87243BD-80F0-4CDE-A1B3-C6A4B5BA6A39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommons", "..\ECommons\ECommons\ECommons.csproj", "{7B54D5B5-7AB4-CCB1-F4B8-2A52B209D934}"
@@ -62,8 +60,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7B54D5B5-7AB4-CCB1-F4B8-2A52B209D934} = {7D0FE0C5-774F-410E-A185-92C3F8CD0BD0}
 	EndGlobalSection
 EndGlobal
