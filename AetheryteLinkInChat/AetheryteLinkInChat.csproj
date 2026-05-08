@@ -3,17 +3,11 @@
         <Version>7.4.0.0</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>Divination.AetheryteLinkInChat</RootNamespace>
-        <TargetFramework>net10.0-windows</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Common\Common.csproj" />
-        <ProjectReference Include="..\AetheryteLinkInChat.IpcModel\AetheryteLinkInChat.IpcModel.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Update="AetheryteLinkInChat.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
+        <ProjectReference
+            Include="..\AetheryteLinkInChat.IpcModel\AetheryteLinkInChat.IpcModel.csproj" />
     </ItemGroup>
 </Project>
