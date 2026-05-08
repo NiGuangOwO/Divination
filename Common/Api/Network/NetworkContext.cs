@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ECommons.DalamudServices.Legacy;
+using System;
 using System.Linq;
-using Dalamud.Game.Network;
 
 namespace Dalamud.Divination.Common.Api.Network;
 

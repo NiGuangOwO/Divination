@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Dalamud.Divination.Common.Api.Dalamud;
+﻿using Dalamud.Divination.Common.Api.Dalamud;
 using Dalamud.Divination.Common.Api.Utilities;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
@@ -11,6 +7,10 @@ using Dalamud.Plugin.Services;
 using Divination.AetheryteLinkInChat.Config;
 using Lumina.Excel;
 using Lumina.Excel.Sheets;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Divination.AetheryteLinkInChat.Solver;
 
@@ -74,7 +74,7 @@ public class AetheryteSolver(IDataManager dataManager)
         uint grandCompanyAetheryteId,
         SeString message,
         World? currentWorld,
-        ushort currentTerritoryTypeId)
+        uint currentTerritoryTypeId)
     {
         var isTerritoryTypeFound = territoryTypeSheet.TryGetRow(currentTerritoryTypeId, out var territory);
         if (!isTerritoryTypeFound)

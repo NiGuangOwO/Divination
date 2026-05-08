@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using Dalamud.Divination.Common.Api.Chat;
+﻿using Dalamud.Divination.Common.Api.Chat;
 using Dalamud.Divination.Common.Api.Command.Attributes;
 using Dalamud.Divination.Common.Api.Dalamud;
 using Dalamud.Divination.Common.Api.Dalamud.Payload;
 using Dalamud.Game;
+using Dalamud.Game.Chat;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Plugin.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Dalamud.Divination.Common.Api.Command;
 
@@ -153,33 +154,33 @@ internal sealed partial class CommandProcessor : ICommandProcessor
         commands.Clear();
     }
 
-    private void OnCheckMessageHandled(XivChatType type, int timestamp, ref SeString sender, ref SeString message, ref bool isHandled)
+    private void OnCheckMessageHandled(IHandleableChatMessage message)
     {
-        if (type != XivChatType.ErrorMessage)
+        if (message.LogKind != XivChatType.ErrorMessage)
         {
             return;
         }
 
-        var cmdMatch = currentLangCommandRegex.Match(message.TextValue).Groups["command"];
+        var cmdMatch = currentLangCommandRegex.Match(message.Message.TextValue).Groups["command"];
         if (cmdMatch.Success)
         {
             var command = cmdMatch.Value;
             if (ProcessCommand(command))
             {
-                isHandled = true;
+                message.PreventOriginal();
             }
 
             DalamudLog.Log.Debug($"Command: {command}");
         }
         else
         {
-            cmdMatch = commandRegexCn.Match(message.TextValue).Groups["command"];
+            cmdMatch = commandRegexCn.Match(message.Message.TextValue).Groups["command"];
             if (cmdMatch.Success)
             {
                 var command = cmdMatch.Value;
                 if (ProcessCommand(command))
                 {
-                    isHandled = true;
+                    message.PreventOriginal();
                 }
 
                 DalamudLog.Log.Debug($"Command: {command}");
